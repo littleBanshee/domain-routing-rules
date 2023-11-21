@@ -1,0 +1,22 @@
+    {
+      "type": "field",
+      "outboundTag": "openai",
+      "domain": [
+          "geosite:bing",
+          "geosite:openai",
+          "auth0.com",
+          "sentry.io",
+          "ai.com",
+          "stripe.com",
+          "intercom.io",
+          "intercomcdn.com",
+          "openai.com",
+          "client-api.arkoselabs.com",
+          "challenges.cloudflare.com",
+          "events.statsigapi.net",
+          "featuregates.org",
+          "identrust.com",
+          "oaistatic.com",
+          "oaiusercontent.com"
+        ]
+      }
