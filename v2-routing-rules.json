@@ -3,7 +3,7 @@
       "outboundTag": "openai",
       "domain": [
           "geosite:bing",
-          "geosite:openai",
+          "openai.com",
           "auth0.com",
           "sentry.io",
           "ai.com",
