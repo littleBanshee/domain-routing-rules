@@ -16,6 +16,7 @@ jobs:
       run: |
         sudo apt-get install jq
         json_array=$(curl -s https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OpenAI/OpenAI.list | grep -v '^#' | awk -F ',' '{print $2}' | sed 's/openai/openai.com/' | awk '{printf "\"%s\",", $0}' | sed 's/,$//')
+        echo $json_array
         jq '.domain = ['"$json_array"']' v2-routing-rules.json > temp.json && mv temp.json v2-routing-rules.json
         ls -alh
     - name: Commit and Push
