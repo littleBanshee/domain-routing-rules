@@ -10,8 +10,8 @@ jobs:
     steps:
     - name: Checkout source
       uses: actions/checkout@v4
-      # with:
-      #  token: ${{ secrets.GH_PAT }}
+      with:
+        token: ${{ secrets.GH_PAT }}
     - name: cmds
       run: |
         sudo apt-get install jq
