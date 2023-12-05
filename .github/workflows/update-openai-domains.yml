@@ -19,6 +19,7 @@ jobs:
         grep -v '^#' | awk -F ',' '{print $2}'| sed 's/openai/openai.com/' > openai.txt
         json_array=$(awk '{printf "\"%s\",", $0}' openai.txt | sed 's/,$//')
         jq '.domain = ['"$json_array"']' v2-routing-rules.json > temp.json && mv temp.json v2-routing-rules.json
+        ls -alh
         rm *.txt
     - name: Commit and Push
       run: |
