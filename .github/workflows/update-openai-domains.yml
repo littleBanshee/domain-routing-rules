@@ -1,0 +1,30 @@
+name: Manual test workflow
+on:
+  workflow_dispatch:
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GH_PAT }}
+    - name: cmds
+      run: |
+        sudo apt-get install jq
+        curl -s https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OpenAI/OpenAI.list | \
+        grep -v '^#' | awk -F ',' '{print $2}'| sed 's/openai/openai.com/' > openai.txt
+        json_array=$(awk '{printf "\"%s\",", $0}' openai.txt | sed 's/,$//')
+        jq '.domain = ['"$json_array"']' v2-routing-rules.json > temp.json && mv temp.json v2-routing-rules.json
+        ls -alh
+        rm *.txt
+    - name: Commit and Push
+      run: |
+          current_time=$(TZ="Asia/Hong_Kong" date +"%a %b %e %T %Z %Y")
+          sed -i "s/Time:.*/Time:$current_time/" README.md
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "update"
+          git push
